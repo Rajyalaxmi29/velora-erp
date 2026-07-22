@@ -1,16 +1,45 @@
-# React + Vite
+# ✦ Velora ERP & CRM
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An enterprise-grade role-based ERP & CRM application built on React, Node.js, Express, TypeScript, and Supabase PostgreSQL via Prisma ORM.
 
-Currently, two official plugins are available:
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Rajyalaxmi29/velora-erp)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Technology Stack
 
-## React Compiler
+*   **Frontend**: React, TypeScript, Tailwind CSS, Lucide icons, Framer Motion.
+*   **Backend**: Node.js, Express.js, TypeScript, JWT, bcryptjs, Zod validation.
+*   **Database**: Supabase PostgreSQL, Prisma ORM 7.
+*   **Hosting**: Render (Backend), Localhost (Frontend).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Deployment Instructions
 
-## Expanding the Oxlint configuration
+### One-Click Deployment to Render
+1. Click the **Deploy to Render** button above.
+2. Render will automatically import the configurations from `render.yaml`.
+3. Provide the required Environment Variables in the Render dashboard:
+    *   `DATABASE_URL`: Your Supabase connection string.
+    *   `JWT_SECRET`: A secure key for token signatures.
+    *   `PORT`: `5000`
+    *   `NODE_ENV`: `production`
+4. Click **Apply** to trigger the build and deploy.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### Local Development Setup
+1. Clone the repository and install dependencies:
+    ```bash
+    npm install
+    cd backend && npm install
+    ```
+2. Set up the `.env` file in the `backend/` folder:
+    ```env
+    PORT=5000
+    DATABASE_URL="your-supabase-connection-string"
+    JWT_SECRET="your-jwt-secret"
+    ```
+3. Generate the Prisma client and apply database migrations:
+    ```bash
+    npx prisma generate
+    npx prisma migrate deploy
+    ```
+4. Start both development servers:
+    *   Backend: `npm run dev` (inside `backend/`)
+    *   Frontend: `npm run dev` (in the root directory)
