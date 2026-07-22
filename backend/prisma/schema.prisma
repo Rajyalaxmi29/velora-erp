@@ -1,0 +1,102 @@
+// ─── Velora ERP & CRM — Prisma Schema ────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  Admin
+  Sales
+  Warehouse
+  Accounts
+}
+
+enum ChallanStatus {
+  Draft
+  Confirmed
+  Cancelled
+}
+
+enum MovementType {
+  IN
+  OUT
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Customer {
+  id           String   @id @default(uuid())
+  name         String
+  email        String
+  phone        String
+  businessName String
+  status       String   @default("Active") // "Lead", "Active", "Inactive"
+  notes        String?
+  followUpDate String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Product {
+  id           String          @id @default(uuid())
+  sku          String          @unique
+  name         String
+  description  String?
+  category     String
+  unitPrice    Float
+  currentStock Int             @default(0)
+  minStock     Int             @default(10)
+  warehouse    String
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  movements    StockMovement[]
+}
+
+model StockMovement {
+  id        String       @id @default(uuid())
+  productId String
+  product   Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  type      MovementType
+  quantity  Int
+  reason    String
+  createdBy String
+  timestamp DateTime     @default(now())
+}
+
+model SalesChallan {
+  id            String        @id @default(uuid())
+  challanNumber String        @unique
+  customerId    String
+  customerName  String
+  grandTotal    Float
+  grandQuantity Int
+  status        ChallanStatus @default(Draft)
+  createdBy     String
+  createdDate   String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  items         ChallanItem[]
+}
+
+model ChallanItem {
+  id          String       @id @default(uuid())
+  challanId   String
+  challan     SalesChallan @relation(fields: [challanId], references: [id], onDelete: Cascade)
+  productId   String
+  productName String
+  quantity    Int
+  price       Float
+  subtotal    Float
+}
