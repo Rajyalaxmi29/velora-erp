@@ -39,7 +39,7 @@ Velora resolves these inefficiencies by linking all operational areas into a uni
 
 ## 3. Live Deployment
 
-*   **Frontend URL (React)**: *[https://velora-erp.vercel.app](https://velora-erp.vercel.app)* (Placeholder)
+*   **Frontend URL (React)**: [https://velora-erp-kappa.vercel.app/](https://velora-erp-kappa.vercel.app/)
 *   **Backend URL (Express)**: *[https://velora-erp-production.up.railway.app](https://velora-erp-production.up.railway.app)* (Placeholder)
 *   **GitHub Repository**: [https://github.com/Rajyalaxmi29/velora-erp](https://github.com/Rajyalaxmi29/velora-erp)
 
